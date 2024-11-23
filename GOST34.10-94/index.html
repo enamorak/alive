@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <title>Форма Шифрования</title>
+</head>
+<header>
+    <a href="../index.html">На главную</a>
+</header>
+<body>
+    <div class="container">
+        <div class="message-box" id="message-box" hidden>
+            <p>Сообщение:</p>
+            <span id="message-text"></span>
+            <button onclick="closeMessageBox()">Закрыть</button>
+        </div>
+        <form id="encryption-form">
+            <div>
+                <label for="EP">P:</label>
+                <input type="text" id="EP" name="EP" placeholder="59">
+            </div>
+            <div>
+                <label for="EQ">Q:</label>
+                <input type="text" id="EQ" name="EQ" placeholder="29"> 
+            </div>
+            <div>
+                <label for="EA">A:</label>
+                <input type="text" id="EA" name="EA" placeholder="49">
+            </div>
+            <div>
+                <label for="EX">X:</label>
+                <input type="text" id="EX" name="EX">
+            </div>
+            <div>
+                <label for="EY">Y:</label>
+                <input type="text" id="EY" name="EY">
+            </div>
+            <div>
+                <label for="DY">Y:</label>
+                <input type="text" id="DY" name="DY">
+            </div>
+            <div>
+                <label for="DR">R:</label>
+                <input type="text" id="DR" name="DR">
+            </div>
+            <div>
+                <label for="DS">S:</label>
+                <input type="text" id="DS" name="DS">
+            </div>
+            <div>
+                <label for="text">Текст:</label>
+                <input type="text" id="text" name="text" required>
+            </div>
+            <div>
+                <button type="button" onclick="encryptText()">Зашифровать</button>
+                <button type="button" onclick="decryptText()">Расшифровать</button>
+            </div>
+            <div>
+                <label for="result">Результат:</label>
+                <input type="text" id="result" name="result" readonly>
+            </div>
+        </form>
+    </div>
+    <script src="main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+</html>

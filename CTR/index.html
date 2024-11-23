@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Форма Шифрования</title>
+</head>
+<header>
+    <a href="../index.html">На главную</a>
+</header>
+<body>
+    <div class="container">
+        <div class="message-box" id="message-box" hidden>
+            <p>Сообщение:</p>
+            <span id="message-text"></span>
+            <button onclick="closeMessageBox()">Закрыть</button>
+        </div>
+        <form id="encryption-form">
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="chmobolotnoye">
+                <label class="form-check-label" for="chmobolotnoye">Режим работы с текстом</label>
+            </div>
+            <div>
+                <label for="Iv">Iv:</label>
+                <input type="text" id="iv" name="iv" value="12345678" required>
+            </div>
+            <div>
+                <label for="key">Ключ:</label>
+                <input type="text" id="key" name="key" value="ffeeddccbbaa99887766554433221100f0f1f2f3f4f5f6f7f8f9fafbfcfdfeff" required>
+            </div>
+            <div>
+                <label for="text">Текст:</label>
+                <input type="text" id="text" name="text" required>
+            </div>
+            <div>
+                <button type="button" onclick="encryptText()">Зашифровать</button>
+                <button type="button" onclick="decryptText()">Расшифровать</button>
+            </div>
+            <div>
+                <label for="result">Результат:</label>
+                <input type="text" id="result" name="result" readonly>
+            </div>
+        </form>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>

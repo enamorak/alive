@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Форма Шифрования</title>
+</head>
+<header>
+    <a href="../index.html">На главную</a>
+</header>
+<body>
+    <div class="container">
+        <div class="message-box" id="message-box" hidden>
+            <p>Сообщение:</p>
+            <span id="message-text"></span>
+            <button onclick="closeMessageBox()">Закрыть</button>
+        </div>
+        <form id="encryption-form">
+            <div>
+                <label for="key">Ключ:</label>
+                <div class="grid-container" id="gridContainer"></div>
+            </div>
+            <div>
+                <label for="text">Текст:</label>
+                <input type="text" id="text" name="text" required>
+            </div>
+            <div>
+                <button type="button" id="submitBtn" onclick="encryptText()">Зашифровать</button>
+                <button type="button" id="submitBtn" onclick="decryptText()">Расшифровать</button>
+            </div>
+            <div>
+                <label for="result">Результат:</label>
+                <input type="text" id="result" name="result" readonly>
+            </div>
+        </form>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
