@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title>Программирование криптографических алгоритмов</title>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+    <header class="border-bottom border-info sticky-top">
+        <nav class="navbar navbar-expand-sm navbar-light bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active rounded" aria-current="page" id="srsaPage">ЦП RSA</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-12">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active rounded" aria-current="page" id="g94Page">34.10-94</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active rounded" aria-current="page" id="dhPage">Diffie-Hellman</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+        <section id="srsa" class="hidden">
+            <div class="container py-md-5 py-3">
+                <div>
+                    <h2 class="cyan">ЦП RSA</h2>
+                    <div>
+                        <div class="row">
+                            <div class="col-9">
+                                <label for="srsaEnArea" class="form-label">Введите текст</label>
+                                <textarea class="form-control" id="srsaEnArea" rows="4"></textarea>
+                            </div>
+                            <div class="col-3"> 
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <label class="form-label">p</label>
+                                            <input type="number" class="form-control" placeholder="p" value="11" min="1" id="srsaEnP">
+                                        </div>
+                                        <div class="col-4">
+                                            <label class="form-label">q</label>
+                                            <input type="number" class="form-control" placeholder="q" value="13" min="1" id="srsaEnQ">
+                                        </div>
+                                        <div class="col-4">
+                                            <label class="form-label">e</label>
+                                            <input type="number" class="form-control" placeholder="e" value="7" min="1" id="srsaEnE">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <label class="form-label">n</label>
+                                            <input type="number" class="form-control" placeholder="n" value="" min="1" id="srsaEnN" disabled>
+                                        </div>
+                                        <div class="col-4">
+                                            <label class="form-label">ф(n)</label>
+                                            <input type="number" class="form-control" placeholder="ф(n)" value="" min="1" id="srsaEnFN" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pt-1 pb-2">
+                            <button id="srsaEnBtn" class="btn btn-outline-primary">Подписать</button>
+                        </div>
+                        <div class="pb-3">
+                            <textarea class="form-control" id="srsaAfterEn" rows="1" placeholder="Полученная подпись" disabled></textarea>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="row">
+                            <div class="col-9">
+                                <label for="srsaDeArea" class="form-label">Введите текст</label>
+                                <textarea class="form-control" id="srsaDeArea" rows="4"></textarea>
+                            </div>
+                            <div class="col-3"> 
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <label class="form-label">p</label>
+                                            <input type="number" class="form-control" placeholder="p" value="11" min="1" id="srsaDeP">
+                                        </div>
+                                        <div class="col-4">
+                                            <label class="form-label">q</label>
+                                            <input type="number" class="form-control" placeholder="q" value="13" min="1" id="srsaDeQ">
+                                        </div>
+                                        <div class="col-4">
+                                            <label class="form-label">e</label>
+                                            <input type="number" class="form-control" placeholder="e" value="7" min="1" id="srsaDeE">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <label class="form-label">n</label>
+                                            <input type="number" class="form-control" placeholder="n" value="" min="1" id="srsaDeN" disabled>
+                                        </div>
+                                        <div class="col-4">
+                                            <label class="form-label">ф(n)</label>
+                                            <input type="number" class="form-control" placeholder="ф(n)" value="" min="1" id="srsaDeFN" disabled>
+                                        </div>
+                                        <div class="col-4">
+                                            <label class="form-label">s</label>
+                                            <input type="number" class="form-control" placeholder="s" value="" min="1" id="srsaDeS" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pt-1 pb-2">
+                            <button type="button" id="srsaDeBtn" class="btn btn-outline-primary" data-mdb-ripple-init>Проверить подпись</button>
+                        </div>
+                        <div class="pb-3">
+                            <textarea class="form-control" id="srsaAfterDe" rows="1" placeholder="Результат проверки" disabled></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="g94" class="hidden">
+            <div class="container py-md-5 py-3">
+                <div>
+                    <h2 class="cyan">ГОСТ  Р 34.10-94</h2>
+                    <div>
+                        <div class="row">
+                            <div class="col-9">
+                                <label for="g94EnArea" class="form-label">Введите текст</label>
+                                <textarea class="form-control" id="g94EnArea" rows="4"></textarea>
+                            </div>
+                            <div class="col-3"> 
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <label class="form-label">p</label>
+                                            <input type="number" class="form-control" placeholder="p" value="59" min="1" id="g94EnP">
+                                        </div>
+                                        <div class="col-4">
+                                            <label class="form-label">q</label>
+                                            <input type="number" class="form-control" placeholder="q" value="29" min="1" id="g94EnQ">
+                                        </div>
+                                        <div class="col-4">
+                                            <label class="form-label">a</label>
+                                            <input type="number" class="form-control" placeholder="a" value="49" min="1" id="g94EnA">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <label class="form-label">x</label>
+                                            <input type="number" class="form-control" placeholder="x" value="23" min="1" id="g94EnX">
+                                        </div>
+                                        <div class="col-4">
+                                            <label class="form-label">y</label>
+                                            <input type="number" class="form-control" placeholder="y" value="" min="1" id="g94EnY" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pt-1 pb-2">
+                            <button id="g94EnBtn" class="btn btn-outline-primary">Подписать</button>
+                        </div>
+                        <div class="pb-3">
+                            <textarea class="form-control" id="g94AfterEn" rows="1" placeholder="Полученная подпись" disabled></textarea>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="row">
+                            <div class="col-9">
+                                <label for="g94DeArea" class="form-label">Введите текст</label>
+                                <textarea class="form-control" id="g94DeArea" rows="4"></textarea>
+                            </div>
+                            <div class="col-3"> 
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <label class="form-label">p</label>
+                                            <input type="number" class="form-control" placeholder="p" value="59" min="1" id="g94DeP">
+                                        </div>
+                                        <div class="col-4">
+                                            <label class="form-label">q</label>
+                                            <input type="number" class="form-control" placeholder="q" value="29" min="1" id="g94DeQ">
+                                        </div>
+                                        <div class="col-4">
+                                            <label class="form-label">a</label>
+                                            <input type="number" class="form-control" placeholder="e" value="49" min="1" id="g94DeA">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <label class="form-label">y</label>
+                                            <input type="number" class="form-control" placeholder="y" value="" min="1" id="g94DeY" disabled>
+                                        </div>
+                                        <div class="col-4">
+                                            <label class="form-label">r</label>
+                                            <input type="number" class="form-control" placeholder="r" value="" min="1" id="g94DeR" disabled>
+                                        </div>
+                                        <div class="col-4">
+                                            <label class="form-label">s</label>
+                                            <input type="number" class="form-control" placeholder="s" value="" min="1" id="g94DeS" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pt-1 pb-2">
+                            <button type="button" id="g94DeBtn" class="btn btn-outline-primary" data-mdb-ripple-init>Проверить подпись</button>
+                        </div>
+                        <div class="pb-3">
+                            <textarea class="form-control" id="g94AfterDe" rows="1" placeholder="Результат проверки" disabled></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="dh" class="hidden">
+            <div class="container py-md-5 py-3">
+                <div>
+                    <h2 class="cyan">Diffie-Hellman</h2>
+                    <div>
+                        <div class="row">
+                            <div class="col-8">
+                                <label for="dhYArea" class="form-label">Вычислить открытый ключ</label>
+                                <textarea class="form-control" id="dhYArea" rows="2"></textarea>
+                            </div>
+                            <div class="col-1">
+                                <label class="form-label">a</label>
+                                <input type="number" class="form-control" placeholder="a" value="120" min="2" id="dhEnA">
+                            </div>
+                            <div class="col-1">
+                                <label class="form-label">n</label>
+                                <input type="number" class="form-control" placeholder="n" value="283" min="2" id="dhEnN">
+                            </div>
+                            <div class="col-1">
+                                <label class="form-label">Получ. Y</label>
+                                <input type="number" class="form-control" placeholder="y" value="240" min="2" id="dhEnY" disabled>
+                            </div>
+                            <div class="col-1">
+                                <label class="form-label">Секр. K</label>
+                                <input type="number" class="form-control" placeholder="k" value="" min="2" id="dhEnK">
+                            </div>
+                        </div>
+                        <div class="pt-1 pb-2">
+                            <button type="button" id="dhEnYBtn" class="btn btn-outline-primary" data-mdb-ripple-init>Вычислить</button>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-9">
+                                <label for="dhKArea" class="form-label">Определить секретный ключ</label>
+                                <textarea class="form-control" id="dhKArea" rows="2"></textarea>
+                            </div>
+                            <div class="col-1">
+                                <label class="form-label">a</label>
+                                <input type="number" class="form-control" placeholder="a" value="120" min="2" id="dhDeA" disabled>
+                            </div>
+                            <div class="col-1">
+                                <label class="form-label">n</label>
+                                <input type="number" class="form-control" placeholder="n" value="283" min="2" id="dhDeN" disabled>
+                            </div>
+                            <div class="col-1">
+                                <label class="form-label">y</label>
+                                <input type="number" class="form-control" placeholder="y" value="4" min="4" id="dhDeY" disabled>
+                            </div>
+                        </div>
+                        <div class="pt-1 pb-2">
+                            <button type="button" id="dhDeKBtn" class="btn btn-outline-primary" data-mdb-ripple-init>Определить</button>
+                        </div>
+
+                        <div class="row">
+                            <div class="pb-3 col-10">
+                                <textarea class="form-control" id="dhAfterDe" rows="3" value="Равенство выполняется" placeholder="Результат проверки" disabled>Равенство выполняется</textarea>
+                            </div>
+                            <div class="col-1">
+                                <label class="form-label">Ka</label>
+                                <input type="number" class="form-control" placeholder="Ka" value="256" min="4" id="dhKa" disabled>
+                            </div>
+                            <div class="col-1">
+                                <label class="form-label">Kb</label>
+                                <input type="number" class="form-control" placeholder="Kb" value="256" min="4" id="dhKb" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+
+    </main>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" 
+        crossorigin="anonymous"></script>
+    <script defer src="ciphers.js"></script>
+</body>
+</html>

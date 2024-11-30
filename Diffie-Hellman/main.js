@@ -80,6 +80,10 @@ function decryptText() {
         document.getElementById('message-text').innerText = 'Ключи должны быть больше 1!';
         return 0;
     }
+    if (Kb == Ka) {
+        document.getElementById('message-text').innerText = 'Открытые и секретные ключи не должны быть равны!';
+        return 0;
+    }
 
     if (decryptDiffie(n, Ka, Kb, Ya, Yb)) {
         document.getElementById('message-text').innerText = 

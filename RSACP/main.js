@@ -53,6 +53,12 @@ function FindRSA(text, P, Q, E, p) {
         throw new Error();
     }
 
+    if (E == D) {
+        document.getElementById('message-text').innerText =  'E не должно быть равно N!!!';
+        document.getElementById('message-box').removeAttribute('hidden');
+        throw new Error();
+    }
+
     let F = (P - 1) * (Q - 1);
 
     for (let i = 2; i <= E; i++) {

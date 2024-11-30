@@ -86,22 +86,55 @@ function G94PrepairePhrase(phrase, p, q, a, x, y, r, s, crtype) {
     let ptest = ElgPrime(p);
     let atest = G94PowMod(a, q, p);
     if (p <= 32) {
-        document.getElementById('message-box').value = "p - должно быть больше длины алфавита";
+        document.getElementById('message-box').innerText = "p - должно быть больше длины алфавита";
         document.getElementById('message-box').removeAttribute('hidden');
         throw new Error;
     }
     if (ptest.length != 0) {
-        document.getElementById('message-box').value = "p - должно быть простым числом";
+        document.getElementById('message-box').innerText = "p - должно быть простым числом";
         document.getElementById('message-box').removeAttribute('hidden');
         throw new Error;
     }
     if (a <= 1 || a >= p-1) {
-        document.getElementById('message-box').value = "a - должно быть 1 < a < p - 1";
+        document.getElementById('message-box').innerText = "a - должно быть 1 < a < p - 1";
         document.getElementById('message-box').removeAttribute('hidden');
         throw new Error;
     }
     if (atest != 1) {
-        document.getElementById('message-box').value = "a - должно быть (a**q)modp == 1";
+        document.getElementById('message-box').innerText = "a - должно быть (a**q)modp == 1";
+        document.getElementById('message-box').removeAttribute('hidden');
+        throw new Error;
+    }
+    //q - это одно из простых чисел, на которые можно разделить p-1
+    
+    // Параметр q должен быть простым сомножителем числа p-1
+    function isPrime(num) {
+        if (num <= 1) return false;
+        for (let i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i === 0) return false;
+        }
+        return true;
+    }
+    
+    let pMinus1 = p - 1;
+    
+    // Примерный массив простых сомножителей p-1 (в дальнейшем это можно сделать динамически)
+    let primeFactors = [];
+    for (let i = 2; i <= pMinus1; i++) {
+        if (pMinus1 % i === 0 && isPrime(i)) {
+            primeFactors.push(i);
+        }
+    }
+    
+    // Проверяем, что q является простым сомножителем p-1
+    if (!primeFactors.includes(q)) { 
+        document.getElementById('message-box').innerText = "q - должно быть простым сомножителем p - 1"; 
+        document.getElementById('message-box').removeAttribute('hidden'); 
+        throw new Error; 
+    }
+
+    if (x > q) {
+        document.getElementById('message-box').innerText = "х - некоторое число, меньшее q";
         document.getElementById('message-box').removeAttribute('hidden');
         throw new Error;
     }

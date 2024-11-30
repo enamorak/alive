@@ -177,7 +177,7 @@ function g(a, key) {
     return from_32(result_32);
 }
 
-//Ксор лево и право
+//Ксор слева и справа
 function festXor32 (left, right) {
     return left.map((l, i) => l ^ right[i]);
 }
@@ -343,7 +343,7 @@ function decryptText() {
     }
 
     document.getElementById('result').value = decryptedText;
-
+ 
     // Показываем сообщение
     document.getElementById('message-text').innerText = 
         'Текст расшифрован';

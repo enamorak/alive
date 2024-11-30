@@ -26,14 +26,14 @@ input {
 button {
     padding: 10px 20px;
     margin: 10px 5px 0 0;
-    background-color: #4caf50;
+    background-color: #414141;
     color: #fff;
     border: none;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #0a0a0a;
 }
 
 .message-box {
